@@ -57,11 +57,107 @@ function RegisterComponent() {
             })
         }
     }
+    console.log(state)
     return (
         <div className="bg-home bg-cover min-h-screen flex flex-col md:flex-row justify-center items-center">
-            <div className='bg-white rounded-3xl p-10 w-1/2 flex justify-center'>
-                <div className="mx-5 sm:w-full sm:max-w-sm">
-                    <form className="space-y-6 mt-5" onSubmit={submitForm}>
+            <div className='bg-white rounded-3xl p-5 w-1/2 flex justify-center'>
+                <div className="mx-5 w-full">
+                    <form onSubmit={submitForm}>
+                        <div className="grid gap-6 mb-6 md:grid-cols-2">
+                            <div>
+                                <label htmlFor="fullname" className="block mb-2 text-sm font-kanit font-medium text-gray-900">Full Name</label>
+                                <input 
+                                    type="text" 
+                                    id="fullname"
+                                    value={fullname}
+                                    onChange={inputValue('fullname')}
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    placeholder="John Stone"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="employee" className="block mb-2 text-sm font-kanit font-medium text-gray-900">Employee Id</label>
+                                <input 
+                                    type="text" 
+                                    id="employee"
+                                    value={employee}
+                                    onChange={inputValue('employee')}
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    placeholder="000-000-0000"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="company" className="block mb-2 text-sm font-medium text-gray-900">Company</label>
+                                <Box sx={{ minWidth: 120 }}>
+                                    <FormControl fullWidth>
+                                        
+                                        <Select
+                                            sx={{borderRadius: '6px'}}
+                                            style={{ height: '42px' }}
+                                            id="demo-simple-select"
+                                            value={company}
+                                            displayEmpty
+                                            onChange={inputValue('company')}
+
+                                        >
+                                            <MenuItem value=''>
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem value={'Tanas'}>Tanas</MenuItem>
+                                            <MenuItem value={'Black Phoenix'}>Black Phoenix</MenuItem>
+                                            <MenuItem value={'TechWave'}>TechWave</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </div>  
+                            <div>
+                                <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Phone number</label>
+                                <input 
+                                type="tel"
+                                id="phone"
+                                value={phone}
+                                onChange={inputValue('phone')}
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="012-345-6789" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required/>
+                            </div>
+                        </div>
+                        <div className="mb-6">
+                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email address</label>
+                            <input 
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={inputValue('email')}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="tech.wave@techwave.com" required/>
+                        </div> 
+                        <div className="mb-6">
+                            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                            <input 
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={inputValue('password')}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="•••••••••" required/>
+                        </div> 
+                        <div className="mb-6">
+                            <label htmlFor="confirm_password" className="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
+                            <input 
+                            type="password"
+                            id="confirm_password"
+                            value={confirmpassword}
+                            onChange={inputValue('confirmpassword')}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="•••••••••" required/>
+                        </div> 
+                        <div className="flex items-start mb-6">
+                            <div className="flex items-center h-5">
+                            <input id="remember" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required/>
+                            </div>
+                            <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" className="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
+                        </div>
+                        <button type="submit" className="font-kanit text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">สมัครสมาชิก</button>
+                    </form>
+                    {/* <form className="space-y-6 mt-5" onSubmit={submitForm}>
                         <div>
                             <label
                                 htmlFor="email"
@@ -229,7 +325,7 @@ function RegisterComponent() {
                                 สมัครสมาชิก
                             </button>
                         </div>
-                    </form>
+                    </form> */}
                     <p className="font-kanit mt-10 text-center text-sm text-gray-500">
                         ถ้ามีบัญชีแล้ว?
                         <Link

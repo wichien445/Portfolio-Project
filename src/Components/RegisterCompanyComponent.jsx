@@ -34,28 +34,9 @@ const names = [
     'Others'
 ]
 
-function getStyles(name, personName, theme) {
-    return {
-        fontWeight:
-            personName.indexOf(name) === -1
-                ? theme.typography.fontWeightRegular
-                : theme.typography.fontWeightMedium,
-    }
-}
-
 function RegisterCompanyComponent() {
   const theme = useTheme()
   const [personName, setPersonName] = useState([])
-
-  const handleChange = (event) => {
-    const {
-        target: { value },
-    } = event
-    setPersonName(
-        // On autofill we get a stringified value.
-        typeof value === 'string' ? value.split(',') : value,
-    )
-  }
   const navigate = useNavigate()
     const [state, setState] = useState({
         country:'',
@@ -63,14 +44,13 @@ function RegisterCompanyComponent() {
         email:'',
         company:'',
         companysize:'',
-        interest:'',
+        interest:[],
         password:'',
         confirmpassword:''
     })
     const { country, phone, email, company, companysize, interest, password, confirmpassword} = state
     const inputValue = name => event => {
       setState({...state,[name]:event.target.value})
-      console.log(state)
     }
     const submitForm=(e)=>{
       e.preventDefault();
@@ -101,10 +81,11 @@ function RegisterCompanyComponent() {
         })
       }
     }
+    console.log(state)
   return (
     <div className="bg-home bg-cover min-h-screen flex flex-col md:flex-row justify-center items-center">
-      <div className='bg-white rounded-3xl p-5 w-fit flex justify-center'>
-        <div className="mx-5 sm:w-full sm:max-w-sm">          
+      <div className='bg-white rounded-3xl p-5 w-1/2 flex justify-center'>
+        <div className="mx-5 w-full">          
           <form onSubmit={submitForm}>
             <div className="grid gap-6 mb-6 md:grid-cols-2">
               {/* <div>
@@ -122,7 +103,7 @@ function RegisterCompanyComponent() {
                   id="company"
                   value={company}
                   onChange={inputValue('company')}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Flowbite" required/>
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="TechWave" required/>
               </div>  
               <div>
                 <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Phone number</label>
@@ -162,15 +143,25 @@ function RegisterCompanyComponent() {
                   sx={{borderRadius: '6px'}}
                   style={{ height: '40px' }}
                   multiple
-                  value={personName}
-                  onChange={handleChange}
+                  displayEmpty
+                  value={interest}
+                  onChange={inputValue('interest')}
                   MenuProps={MenuProps}
+                  renderValue={(selected) => {
+                    if (selected.length === 0) {
+                      return <em>None</em>;
+                    }
+        
+                    return selected.join(', ');
+                  }}
                 >
+                  <MenuItem disabled value="">
+                    <em>None</em>
+                  </MenuItem>
                   {names.map((name) => (
                     <MenuItem
                       key={name}
                       value={name}
-                      style={getStyles(name, personName, theme)}
                     >
                       {name}
                     </MenuItem>
@@ -185,7 +176,7 @@ function RegisterCompanyComponent() {
                   id="email"
                   value={email}
                   onChange={inputValue('email')}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="john.doe@company.com" required/>
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="tech.wave@techwave.com" required/>
             </div> 
             <div className="mb-6">
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>

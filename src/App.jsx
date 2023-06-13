@@ -95,8 +95,9 @@ function App() {
       <div className='bg-white rounded-3xl p-10 w-1/2 flex justify-center'>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm py-10">
             <img
-              className="mx-auto h-44 w-44 rounded-full"
+              className="mx-auto h-auto w-44 rounded-full"
               src={logo}
+              alt='techwave-logo'
             />
             <h2 className="font-kanit font-bold mt-10 text-center text-2xl leading-9 tracking-tight text-gray-900">
               TechWave

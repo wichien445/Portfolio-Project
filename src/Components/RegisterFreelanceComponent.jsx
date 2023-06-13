@@ -1,13 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 //MUI
-import { useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
-import Chip from '@mui/material/Chip'
 
 function RegisterFreelanceComponent() {
     const [state, setState] = useState({
@@ -25,12 +23,12 @@ function RegisterFreelanceComponent() {
 
     const inputValue = name => event => {
         setState({...state,[name]:event.target.value})
-        console.log(state)
     }
+    console.log(state)
   return (
     <div className='bg-home bg-cover min-h-screen flex flex-col md:flex-row justify-center items-center'>
         <div className='bg-white rounded-3xl p-5 w-1/2 flex justify-center'>
-            <div className="mx-5 w-full max-w-sm">
+            <div className="mx-5 my-3 w-full">
                 <form>
                     <div className="grid gap-6 mb-6 grid-cols-3">
                         <div>
@@ -40,7 +38,7 @@ function RegisterFreelanceComponent() {
                                 id="fullname"
                                 value={fullname}
                                 onChange={inputValue('fullname')}
-                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="John" required/>
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="John Stone" required/>
                         </div>
                         <div>
                             <label htmlFor="company" className="block mb-2 text-sm font-medium text-gray-900">Company</label>
@@ -50,7 +48,7 @@ function RegisterFreelanceComponent() {
                                 value={company}
                                 onChange={inputValue('company')}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                                placeholder="Flowbite"
+                                placeholder="TechWave"
                             />
                         </div>  
                         <div>
@@ -94,22 +92,24 @@ function RegisterFreelanceComponent() {
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Position interest</label>
                             <Box sx={{ minWidth: 120 }}>
                                 <FormControl fullWidth>    
-                                <Select
-                                    className=''
-                                    sx={{borderRadius: '6px'}}
-                                    style={{ height: '42px' }}
-                                    id="demo-simple-select"
-                                    value={interest}
-                                    onChange={inputValue('interest')}
-                                >
-                                    <MenuItem value={'FullStack Developer'}>FullStack Developer</MenuItem>
-                                    <MenuItem value={'Frontend Developer'}>Frontend Developer</MenuItem>
-                                    <MenuItem value={'Backend Developer'}>Backend Developer</MenuItem>
-                                    <MenuItem value={'Mobile Developer'}>Mobile Developer</MenuItem>
-                                    <MenuItem value={'DevOps Engineer'}>DevOps Engineer</MenuItem>
-                                    <MenuItem value={'UX/UI Designer'}>UX/UI Designer</MenuItem>
-                                    <MenuItem value={'Others'}>Others</MenuItem>
-                                </Select>
+                                    <Select
+                                        sx={{borderRadius: '6px'}}
+                                        style={{ height: '42px' }}
+                                        value={interest}
+                                        onChange={inputValue('interest')}
+                                        displayEmpty
+                                    >
+                                        <MenuItem value=''>
+                                            <em>None</em>
+                                        </MenuItem>
+                                        <MenuItem value='FullStack Developer'>FullStack Developer</MenuItem>
+                                        <MenuItem value='Frontend Developer'>Frontend Developer</MenuItem>
+                                        <MenuItem value='Backend Developer'>Backend Developer</MenuItem>
+                                        <MenuItem value='Mobile Developer'>Mobile Developer</MenuItem>
+                                        <MenuItem value='DevOps Engineer'>DevOps Engineer</MenuItem>
+                                        <MenuItem value='UX/UI Designer'>UX/UI Designer</MenuItem>
+                                        <MenuItem value='Others'>Others</MenuItem>
+                                    </Select>
                                 </FormControl>
                             </Box>
                         </div>
@@ -122,7 +122,7 @@ function RegisterFreelanceComponent() {
                             value={email}
                             onChange={inputValue('email')}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            placeholder="john.doe@company.com"
+                            placeholder="tech.wave@techwave.com"
                             required
                         />
                     </div> 
@@ -372,9 +372,6 @@ function RegisterFreelanceComponent() {
                     </Link>
                 </p>
             </div>
-        </div>
-        <div>
-            <p>test</p>
         </div>
     </div>
   )
